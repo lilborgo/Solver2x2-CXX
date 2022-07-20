@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(include)
 
-add_executable(Solver2x2_CXX
+add_library(Solver2x2 STATIC
         src/Coords.h
         src/Coords.cpp
         src/move.cpp
@@ -14,4 +14,9 @@ add_executable(Solver2x2_CXX
         src/Explore.h
         src/Tiles.cpp
         src/Tiles.h
-        main.cpp src/Solver2x2.cpp include/Solver2x2.h)
+        src/Solver2x2.cpp)
+
+add_executable(example
+        example.cpp  )
+
+target_link_libraries(example Solver2x2)

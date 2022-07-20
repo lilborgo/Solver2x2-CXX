@@ -37,6 +37,22 @@ namespace Solver2x2 {
     void deinit();
 
     /**
+     *  Its used to store the solver into a file.
+     *
+     * @param name      : The name of the file to store the solver.
+     * @return          : True if its done correctly, false if not.
+     */
+    bool writeFile(const std::string& name);
+
+    /**
+     * Its used to load the coordinates from a file.
+     *
+     * @param name      : The name of the file where are stored the coordinates.
+     * @return          : True if its done correctly, false if not.
+     */
+    bool loadFile(const std::string& name);
+
+    /**
      * Solve the cube.
      *
      * * The cube must be given in a string in the following order:

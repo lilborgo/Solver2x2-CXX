@@ -16,6 +16,7 @@
  *  You can give directly the color of the cube.
  */
 
+#include <fstream>
 #include "Solver2x2.h"
 #include "Explore.h"
 #include "Coords.h"
@@ -42,6 +43,40 @@ namespace Solver2x2{
 
         delete scramble;
         scramble = nullptr;
+    }
+
+    //write to file
+    bool writeFile(const std::string& name){
+        std::ofstream file(name);
+
+        if(!file)
+            return false;
+
+        if(scramble == nullptr)
+            init();
+
+        file.write(reinterpret_cast<char *>(scramble->scrambleArray), sizeof(uint64_t) * CUBE_CASES);
+        file.close();
+
+        return true;
+    }
+
+    //read the solver from a file
+    bool loadFile(const std::string& name){
+        std::ifstream file(name);
+
+        if(!file)
+            return writeFile(name);
+
+        if(scramble != nullptr)
+            deinit();
+
+        scramble = new Explore::Scramble();
+
+        file.read(reinterpret_cast<char *>(scramble->scrambleArray), sizeof(uint64_t) * CUBE_CASES);
+        file.close();
+
+        return true;
     }
 
     //solve the cube
