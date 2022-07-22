@@ -209,6 +209,19 @@ namespace Solver2x2{
          * @return          : The new cube with no colors.
          */
         std::string stdTiles(const std::string& cube);
+
+    public:
+
+        /**
+         * It moves the tiles in base of a move.
+         * @param tiles
+         */
+        static void moveTiles(char tiles[], int8_t move);
+
+        /**
+         * Tests the tiles.
+         */
+        static void test();
     };
 }
 

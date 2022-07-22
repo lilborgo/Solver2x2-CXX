@@ -72,6 +72,34 @@ namespace Solver2x2 {
      * @return              : The string with the solving scramble.
      */
     std::string solve(const std::string& cube);
+
+    /**
+     * Generate a random cube.
+     *
+     * @return              : The random cube.
+     */
+    std::string random();
+
+    /**
+     * Run all the tests of the code to check if its run correctly.
+     */
+    void tests();
+
+    /**
+     * This is used to get an inverse scramble.
+     *
+     * @param scramble      : The scramble to invert.
+     * @return              : The inverted scramble.
+     */
+    std::string invScramble(const std::string& scramble);
+
+    /**
+     * Create a cube from a scramble.
+     *
+     * @param scramble      : The scramble to convert into a cube.
+     * @return              : The cube created.
+     */
+    std::string fromScramble(const std::string& scramble);
 }
 
 #endif //SOLVER2X2_CXX_SOLVER2X2_H

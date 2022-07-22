@@ -8,6 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <cstring>
+#include <cassert>
 #include "Explore.h"
 
 namespace Solver2x2{
@@ -66,7 +67,7 @@ namespace Solver2x2{
     //clone scramble
     Explore::Scramble* Explore::Scramble::clone() const{
         auto* newS = new Scramble();
-        memcpy(newS->s[0], scrambleArray, sizeof(uint32_t) * CUBE_CASES);
+        memcpy(newS->scrambleArray, scrambleArray, sizeof(uint64_t) * CUBE_CASES);
         return newS;
     }
 
@@ -88,8 +89,8 @@ namespace Solver2x2{
 
     //generate the whole tree
     void Explore::generate(){
-        for(int8_t i = 0; i < MAX_DEPTH; i++)
-            expand(i);
+        for(int8_t i = 0; i < MAX_DEPTH-1; i++)
+            assert(expand(i) == DEPTH_SIZE[i+1]);
     }
 
     //reallocate tree and explored
@@ -171,6 +172,7 @@ namespace Solver2x2{
                     tree.t[newDepth][idx].p = p2;
 
                     scramble.s[o2][p2] = (((moves << 4) + invMove(move)) << 4) + depth+1;
+
                     idx++;
                 }
             }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Solver2x2.h>
 #include <chrono>
+#include "src/Tiles.h"
 
 typedef std::chrono::high_resolution_clock Clock;
 
@@ -14,8 +15,7 @@ int main() {
 
     std::cout << "Initialization: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms" << std::endl;
 
-    //solve
-    std::cout << Solver2x2::solve("RYWOGBOROYWBBYOWYBGRRGGW") << std::endl;
+    std::cout << Solver2x2::solve(Solver2x2::random()) << std::endl;
 
     //deinitialize
     Solver2x2::deinit();

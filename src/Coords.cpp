@@ -158,8 +158,6 @@ namespace Solver2x2 {
         int8_t j;
         int8_t cube[N_CORNERS];
 
-        testMoves();
-
         for(i = 0; i < ORI_CASES; i++){
             invCOri(cube, i);
             assert(comCOri(cube) == i);
