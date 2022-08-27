@@ -1,7 +1,6 @@
 #include <iostream>
 #include <Solver2x2.h>
 #include <chrono>
-#include "src/Tiles.h"
 
 typedef std::chrono::high_resolution_clock Clock;
 

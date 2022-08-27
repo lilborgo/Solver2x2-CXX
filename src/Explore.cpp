@@ -36,7 +36,6 @@ namespace Solver2x2{
             explored[i] = &exploredArray[i*PERM_CASES];
 
         //clean the memory
-
         memset(&cubeArray[0], 0, sizeof(CubeNode));
         memset(exploredArray, 0, CUBE_CASES);
     }
@@ -77,7 +76,7 @@ namespace Solver2x2{
     }
 
     //set first cube already explored
-    Explore::Explore(const Coords &coords) {
+    Explore::Explore(const Coords &coords, Scramble* _scramble) : scramble(_scramble){
         this->coords = coords;
         isExplored(0, 0);
     }
@@ -96,12 +95,11 @@ namespace Solver2x2{
     //reallocate tree and explored
     void Explore::clean(){
         tree = Tree();
-        scramble = Scramble();
     }
 
     //solve the cube
     uint64_t Explore::solve(uint16_t ori, uint16_t perm){
-        return scramble.s[ori][perm];
+        return scramble->s[ori][perm];
     }
 
     //convert compressed scramble into a string
@@ -141,10 +139,6 @@ namespace Solver2x2{
         return res;
     }
 
-    Explore::Scramble* Explore::getScramble() const{
-        return this->scramble.clone();
-    }
-
     //compute sons of a particular depth
     int32_t Explore::expand(int8_t depth){
         auto newDepth = (int8_t)(1+depth);
@@ -160,7 +154,7 @@ namespace Solver2x2{
             node = &tree.t[depth][i];
             o = node->o;
             p = node->p;
-            moves = scramble.s[o][p] >> 4;
+            moves = scramble->s[o][p] >> 4;
 
             for(move = 0; move < N_MOVES; move++){
                 p2 = coords.moveCPerm(p, move);
@@ -171,7 +165,7 @@ namespace Solver2x2{
                     tree.t[newDepth][idx].o = o2;
                     tree.t[newDepth][idx].p = p2;
 
-                    scramble.s[o2][p2] = (((moves << 4) + invMove(move)) << 4) + depth+1;
+                    scramble->s[o2][p2] = (((moves << 4) + invMove(move)) << 4) + depth+1;
 
                     idx++;
                 }

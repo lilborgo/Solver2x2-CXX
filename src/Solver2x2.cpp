@@ -29,12 +29,14 @@ namespace Solver2x2{
 
     //init the solver
     void init(){
-        Coords coords;
-        Explore explore(coords);
-
         deinit();
-        explore.generate();
-        scramble = explore.getScramble();
+        scramble = new Explore::Scramble();
+
+        {
+            Coords coords;
+            Explore explore(coords, scramble);
+            explore.generate();
+        }
     }
 
     //deallocate the scramble solver
@@ -93,9 +95,9 @@ namespace Solver2x2{
     //random cube
     std::string random(){
         static bool firstTime = true;
-        int8_t moves;
+
         char cube[N_TILES+1] = "YYYYOOOOGGGGWWWWRRRRBBBB";
-        std::string cubeStr = "";
+        std::string cubeStr;
 
         if(firstTime){
             srand((unsigned)time(nullptr));
@@ -105,6 +107,7 @@ namespace Solver2x2{
         for(int8_t i = 0; i < 20; i++)
             Tiles::moveTiles(cube, rand()%N_MOVES);
 
+        cubeStr = "";
         cubeStr.append(cube);
 
         return cubeStr;

@@ -4,11 +4,11 @@ A C++ solver for the 2x2 cube.
 
 # Usage
 
-First, you need to initialize the solver using:
+First, you need to initialize the solver using(uses 180MB of RAM):
 ```C++
     Solver2x2::init();
 ```
-Or you can load from the memory usign:
+Or you can load from the memory usign(uses 31MB of RAM):
 ```C++
     Solver2x2::loadFile("name.m2pc");
 ```
@@ -25,7 +25,7 @@ Its suggested to use always the loadFile, because its faster after the first tim
 
 # Time and resources
 
-This solver uses around 150 MB if you do not use the precomputed file, 30 if you use it.
+This solver uses around 180 MB if you do not use the precomputed file, 30 if you use it.
 The initialization requires around 3 seconds on an AMD Ryzen 5 3500U.
 The solve (Solver2x2::solve) is immediatly instead, it is less than a millisecond.
 
